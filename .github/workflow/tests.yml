@@ -1,0 +1,49 @@
+name: Tests 
+
+on:
+  push:
+    branches:
+    - edge
+    - release/*
+    paths-ignore:
+    - 'LICENSE-*'
+    - '**.md'
+    - '**.txt'
+    - '.github/**'
+  pull_request:
+    branches:
+    - "pull/**"
+    paths-ignore:
+    - 'LICENSE-*'
+    - '**.md'
+    - '**.txt'
+    - '.github/**'
+
+jobs:
+  test:
+    name: Perform testing on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+
+    - uses: actions/checkout@v3
+
+    - name: Setup Shellcheck & Bats
+      run: |
+        sudo apt update
+        sudo apt install shellcheck bats
+
+
+    - name: Shellcheck
+      run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )
+    
+    - name: Bats
+      run: bats -t $( find test/fixture -type f -name "*.bats" )
+
+
+
+    
+
+
+

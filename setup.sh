@@ -31,6 +31,8 @@ declare -A SYMLINK_TARGETS_VISUAL=(
     ["$HOME/.xserverrc"]="dist/config/visual/setup_server.bash"
 
     ["$HOME/.i3wm"]="dist/config/visual/app/i3wm.config"
+
+    ["$HOME/.picom"]="dist/config/visual/app/picom.config"
 )
 
 # Inherit from `bare` setup for `visual` setup

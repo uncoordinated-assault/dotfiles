@@ -21,6 +21,8 @@ CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
 declare -A SYMLINK_TARGETS_BARE=(
     ["$HOME/.bash_profile"]="dist/config/bare/setup_env.bash"
     ["$HOME/.bashrc"]="dist/config/bare/setup_shell.bash"
+
+    ["$HOME/.config/starship.toml"]="dist/config/bare/app/starship_config.toml"
 )
 
 # Associative array indicating the symlinks for the `visual` setup mode

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ -f "$HOME/util/standard_lib.sh" ] && source "$HOME/util/standard_lib.sh"
+[ -f "$HOME/util/standard_lib.bash" ] && source "$HOME/util/standard_lib.bash"
 
 # Fallback to simple shell if `starship` is not installed
 

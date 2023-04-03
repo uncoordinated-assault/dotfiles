@@ -78,4 +78,6 @@ for symlink_path in "${!SYMLINK_TARGETS[@]}"; do
     ln -S "old" -sbfv "$symlink_contents" "$symlink_path"
 done
 
-unset -f SETUP_MODE CURRENT_FILE CURRENT_DIRECTORY SYMLINK_TARGETS "$( compgen -v | grep -Eo "^SYMLINK_TARGETS_[A-Z]+$" | tr "\n" " " )"
+# no word-splitting guaranteed
+# shellcheck disable=2046
+unset -f SETUP_MODE CURRENT_FILE CURRENT_DIRECTORY SYMLINK_TARGETS $( compgen -v | grep -Eo "^SYMLINK_TARGETS_[A-Z]+$" | tr "\n" " " )

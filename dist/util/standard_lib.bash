@@ -5,11 +5,11 @@ executable_exists( ) {
 }
 
 relative_to( ) {
-    realpath -L --relative-to="$1" "$2" -m
+    realpath -Lm --relative-to="$1" "$2"
 }
 
 reduce_path( ) {
-    realpath -L --relative-to="$1" "$2" -m
+    realpath -Lm --relative-to="$1" "$2"
 }
 
 repository_root( ) {

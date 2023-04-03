@@ -38,6 +38,9 @@ declare -A SYMLINK_TARGETS_VISUAL=(
 
     ["$HOME/.alacritty.yaml"]="dist/config/visual/app/alacritty.config.yaml"
     ["$HOME/.alacritty.theme.yaml"]="dist/config/visual/app/alacritty.theme.yaml"
+
+    ["$HOME/.rofi"]="dist/config/visual/app/rofi.config"
+    ["$HOME/.rofi_themes"]="dist/config/visual/app/rofi_themes"
 )
 
 # Inherit from `bare` setup for `visual` setup

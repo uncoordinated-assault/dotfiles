@@ -74,13 +74,8 @@ for symlink_path in "${!SYMLINK_TARGETS[@]}"; do
         :
     fi
 
-    # Backup already existing file/directory
-    if [[ -e "$symlink_path" ]]; then
-        mv "$symlink_path" "${symlink_path}-old"
-        :
-    fi
-
-    ln -sfv "$symlink_contents" "$symlink_path"
+    # Perform the link, backing up existing files if possible
+    ln -S "old" -sbfv "$symlink_contents" "$symlink_path"
 done
 
 unset -f SETUP_MODE CURRENT_FILE CURRENT_DIRECTORY SYMLINK_TARGETS "$( compgen -v | grep -Eo "^SYMLINK_TARGETS_[A-Z]+$" | tr "\n" " " )"

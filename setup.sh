@@ -33,6 +33,9 @@ declare -A SYMLINK_TARGETS_VISUAL=(
     ["$HOME/.i3wm"]="dist/config/visual/app/i3wm.config"
 
     ["$HOME/.picom"]="dist/config/visual/app/picom.config"
+
+    ["$HOME/.alacritty.yaml"]="dist/config/visual/app/alacritty.config.yaml"
+    ["$HOME/.alacritty.theme.yaml"]="dist/config/visual/app/alacritty.theme.yaml"
 )
 
 # Inherit from `bare` setup for `visual` setup

@@ -19,14 +19,14 @@ CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
 
 # Associative array indicating the symlinks for the `bare` setup mode
 declare -A SYMLINK_TARGETS_BARE=(
-    ["$HOME/.bash_profile"]="dist/config/bare/setup_env.sh"
-    ["$HOME/.bashrc"]="dist/config/bare/setup_shell.sh"
+    ["$HOME/.bash_profile"]="dist/config/bare/setup_env.bash"
+    ["$HOME/.bashrc"]="dist/config/bare/setup_shell.bash"
 )
 
 # Associative array indicating the symlinks for the `visual` setup mode
 declare -A SYMLINK_TARGETS_VISUAL=(
-    ["$HOME/.xinitrc"]="dist/config/visual/setup_desktop.sh"
-    ["$HOME/.xserverrc"]="dist/config/visual/setup_server.sh"
+    ["$HOME/.xinitrc"]="dist/config/visual/setup_desktop.bash"
+    ["$HOME/.xserverrc"]="dist/config/visual/setup_server.bash"
 )
 
 # Inherit from `bare` setup for `visual` setup

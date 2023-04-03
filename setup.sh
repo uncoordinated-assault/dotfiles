@@ -29,6 +29,8 @@ declare -A SYMLINK_TARGETS_BARE=(
 declare -A SYMLINK_TARGETS_VISUAL=(
     ["$HOME/.xinitrc"]="dist/config/visual/setup_desktop.bash"
     ["$HOME/.xserverrc"]="dist/config/visual/setup_server.bash"
+
+    ["$HOME/.i3wm"]="dist/config/visual/app/i3wm.config"
 )
 
 # Inherit from `bare` setup for `visual` setup

@@ -15,7 +15,7 @@ esac
 CURRENT_FILE="$( pwd -P )/${0}"
 CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
 
-[ -f "$CURRENT_DIRECTORY/dist/util/standard_lib.sh" ] && source "$CURRENT_DIRECTORY/dist/util/standard_lib.sh"
+[ -f "$CURRENT_DIRECTORY/dist/util/standard_lib.bash" ] && source "$CURRENT_DIRECTORY/dist/util/standard_lib.bash"
 
 # Associative array indicating the symlinks for the `bare` setup mode
 declare -A SYMLINK_TARGETS_BARE=(
@@ -35,6 +35,7 @@ for var_name in "${!SYMLINK_TARGETS_BARE[@]}"; do
     SYMLINK_TARGETS_VISUAL["$var_name"]="${SYMLINK_TARGETS_BARE["$var_name"]}"
 done
 
+# create a reference to our desired associated array
 # shellcheck disable=2155
 declare -n SYMLINK_TARGETS="SYMLINK_TARGETS_$( echo "$SETUP_MODE" | tr "[:lower:]" "[:upper:]" )"
 

@@ -34,6 +34,8 @@ declare -A SYMLINK_TARGETS_VISUAL=(
 
     ["$HOME/.picom"]="dist/config/visual/app/picom.config"
 
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"]="dist/config/visual/app/common_directories.config"
+
     ["$HOME/.alacritty.yaml"]="dist/config/visual/app/alacritty.config.yaml"
     ["$HOME/.alacritty.theme.yaml"]="dist/config/visual/app/alacritty.theme.yaml"
 )

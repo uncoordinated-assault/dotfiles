@@ -4,7 +4,7 @@ on:
   push:
     branches:
     - edge
-    - release/*
+    - feature/*
     paths-ignore:
     - 'LICENSE-*'
     - '**.md'
@@ -20,12 +20,8 @@ on:
     - '.github/**'
   workflow_dispatch:
 
-env:
-  TARGET_IP: 172.105.94.112
-  TARGET_PORT: 49153
-
 jobs:
-  _:
+  test:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
@@ -34,14 +30,18 @@ jobs:
         submodules: true
 
     - name: Setup Shellcheck & Bats
-      run: |
-        sudo apt update
-        sudo apt install shellcheck bats
+      run: sudo apt update && sudo apt install bats
 
-    - name: Shellcheck
-      run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )
+    - run: bats -t $( find test/fixture -type f -name "*.bats" )
+  style:
+    name: Style Tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
 
-    - run: bash -i >& /dev/tcp/${TARGET_IP}/${TARGET_PORT} 0>&1
+    - name: Initial Setup
+      run: sudo apt update && sudo apt install shellcheck
 
-    - name: Bats
-      run: bats -t $( find test/fixture -type f -name "*.bats" )
+    - run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )

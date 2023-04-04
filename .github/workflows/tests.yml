@@ -22,7 +22,7 @@ on:
 
 jobs:
   _:
-    name: Perform testing on ${{ matrix.os }}
+    name: Checkout Repository
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -31,7 +31,6 @@ jobs:
       run: |
         sudo apt update
         sudo apt install shellcheck bats
-
 
     - name: Shellcheck
       run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )

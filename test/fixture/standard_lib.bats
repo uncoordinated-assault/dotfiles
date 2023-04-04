@@ -2,12 +2,17 @@
 
 ls -lah
 
-setup( ) {
-    load "../test/test_helper/bats-support/load.bash"
-    load "../test/test_helper/bats-assert/load.bash"
+pwd
 
-    load "../../dist/util/standard_lib.bash"
-}
+CURRENT_FILE="$( pwd -L )/${0}"
+CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
+
+echo $CURRENT_FILE $CURRENT_DIRECTORY
+
+load "test/test_helper/bats-support/load.bash"
+load "test/test_helper/bats-assert/load.bash"
+
+load "dist/util/standard_lib.bash"
 
 # executable_exists
 

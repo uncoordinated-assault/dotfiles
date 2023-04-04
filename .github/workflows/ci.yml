@@ -29,7 +29,7 @@ jobs:
       with:
         submodules: true
 
-    - name: Setup Shellcheck & Bats
+    - name: Initial Setup
       run: sudo apt update && sudo apt install bats
 
     - run: bats -t $( find test/fixture -type f -name "*.bats" )

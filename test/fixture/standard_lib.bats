@@ -1,10 +1,12 @@
 #!/usr/bin/env bats
 
-setup( ) {
-    load "../test/test_helper/bats-support/load"
-    load "../test/test_helper/bats-assert/load"
+ls -lah
 
-    load "../../dist/util/standard_lib"
+setup( ) {
+    load "../test/test_helper/bats-support/load.bash"
+    load "../test/test_helper/bats-assert/load.bash"
+
+    load "../../dist/util/standard_lib.bash"
 }
 
 # executable_exists

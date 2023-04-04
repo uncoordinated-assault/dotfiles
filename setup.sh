@@ -12,7 +12,7 @@ case "$SETUP_MODE" in
         ;;
 esac
 
-CURRENT_FILE="$( pwd -P )/${0}"
+CURRENT_FILE="$( pwd -L )/${0}"
 CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
 
 [ -f "$CURRENT_DIRECTORY/dist/util/standard_lib.bash" ] && source "$CURRENT_DIRECTORY/dist/util/standard_lib.bash"

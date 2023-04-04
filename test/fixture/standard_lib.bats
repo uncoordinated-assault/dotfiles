@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 setup( ) {
-    REPOSITORY_PATH="$( realpath -L "$( dirname "$( git rev-parse --git-dir 2> /dev/null )" )" )"
+    REPOSITORY_PATH="$( realpath -Lm "$BATS_TEST_DIRNAME/../.." )"
 
     load "${REPOSITORY_PATH}/test/test_helper/bats-support/load"
     load "${REPOSITORY_PATH}/test/test_helper/bats-assert/load"
@@ -15,7 +15,7 @@ setup( ) {
 
 @test "executable_exists: should tell whenever a determined shell invocable exists" {
     run executable_exists "init"
-    
+
     assert_output "1"
 }
 
@@ -29,7 +29,7 @@ setup( ) {
 
 @test "relative_to: should function normally" {
     run relative_to "$HOME" "${HOME}/inner_directory"
-    
+
     assert_output "inner_directory"
 }
 
@@ -37,7 +37,7 @@ setup( ) {
 
 @test "reduce_path: should function normally" {
     run reduce_path "/" "/home/${USER}/../../usr/bin"
-    
+
     assert_output "usr/bin"
 }
 

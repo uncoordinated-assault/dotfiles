@@ -10,8 +10,8 @@ The installation process is fairly straightforward:
 
 - There are two modes of setup available.
 - They go by the names `bare` and `visual`
-- The `bare` mode is what you would call `the _minimalistic_ setup`, it contains just enough for the initialization of both my system and my development environment .
-- The `visual` mode is what you would call `the _full_ setup`, it inherits from the `bare` mode and it contains the following:
+- The `bare` mode is what you would call `the minimalistic setup`, it contains just enough for the initialization of both my system and my development environment .
+- The `visual` mode is what you would call `the full setup`, it inherits from the `bare` mode and it contains the following:
     - Provides both `.xinitrc` and `.xserverrc` files required for the `X Server`.
     - Configuration files for the following programs:
         - `i3 window manager`.

@@ -3,8 +3,10 @@
 [ -f "$HOME/util/standard_lib.bash" ] && source "$HOME/util/standard_lib.bash"
 
 declare -A DEFAULT_ENVIRONMENT=(
-    ["ARCH"]=$( uname -m )
-    ["EDITOR"]=$( command -v helix vim nano emacs | head -1 )
+    [ARCH]="$( uname -m )"
+    [EDITOR]="$( command -v helix vim nano emacs | head -1 )"
+    [SSH_AUTH_SOCK]="$( gpgconf --list-dirs agent-ssh-socket )"
+    [SSH_AGENT_PID]="$( pgrep "gpg-agent" )"
 )
 
 # Inherit previously set $PATH from /etc/profile
@@ -18,8 +20,8 @@ declare -a OPTIONAL_PATHS=( "." "$HOME/util" "$HOME/.local/bin" )
 if [ "$( executable_exists luarocks )" = 1 ]; then
     OPTIONAL_PATHS+=( "$( luarocks path --lr-bin )" )
 
-    DEFAULT_ENVIRONMENT["LUA_PATH"]="$( luarocks path --lr-path )"
-    DEFAULT_ENVIRONMENT["LUA_CPATH"]="$( luarocks path --lr-cpath )"
+    DEFAULT_ENVIRONMENT[LUA_PATH]="$( luarocks path --lr-path )"
+    DEFAULT_ENVIRONMENT[LUA_CPATH]="$( luarocks path --lr-cpath )"
 fi
 
 DEFAULT_PATH=$( echo "$PATH" | tr ":" " " )

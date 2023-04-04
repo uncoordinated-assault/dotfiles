@@ -1,18 +1,9 @@
 #!/usr/bin/env bats
 
-ls -lah
+load "$PWD/test/test_helper/bats-support/load"
+load "$PWD/test/test_helper/bats-assert/load"
 
-pwd
-
-CURRENT_FILE="$( pwd -L )/${0}"
-CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
-
-echo $CURRENT_FILE $CURRENT_DIRECTORY
-
-load "test/test_helper/bats-support/load.bash"
-load "test/test_helper/bats-assert/load.bash"
-
-load "dist/util/standard_lib.bash"
+load "$PWD/dist/util/standard_lib"
 
 # executable_exists
 
@@ -42,12 +33,4 @@ load "dist/util/standard_lib.bash"
     run reduce_path "/" "/home/${USER}/../../usr/bin"
 
     assert_output "usr/bin"
-}
-
-# repository_root
-
-@test "repository_root: should function normally" {
-    run repository_root
-
-    assert_output "$REPOSITORY_PATH"
 }

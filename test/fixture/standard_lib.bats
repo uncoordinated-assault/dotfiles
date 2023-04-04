@@ -1,9 +1,11 @@
 #!/usr/bin/env bats
 
-load "$PWD/test/test_helper/bats-support/load"
-load "$PWD/test/test_helper/bats-assert/load"
+REPOSITORY_ROOT="$( realpath -Lm "$( dirname "$( git rev-parse --git-dir 2> /dev/null )" )" )"
 
-load "$PWD/dist/util/standard_lib"
+load "${REPOSITORY_ROOT}/test/test_helper/bats-support/load"
+load "${REPOSITORY_ROOT}/test/test_helper/bats-assert/load"
+
+load "${REPOSITORY_ROOT}/dist/util/standard_lib"
 
 # executable_exists
 
@@ -33,4 +35,12 @@ load "$PWD/dist/util/standard_lib"
     run reduce_path "/" "/home/${USER}/../../usr/bin"
 
     assert_output "usr/bin"
+}
+
+# repository_root
+
+@test "repository_root: should function normally" {
+    run repository_root
+
+    assert_output "$REPOSITORY_ROOT"
 }

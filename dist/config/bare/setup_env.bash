@@ -4,7 +4,7 @@
 
 declare -A DEFAULT_ENVIRONMENT=(
     [ARCH]="$( uname -m )"
-    [EDITOR]="$( command -v helix vim nano emacs | head -1 )"
+    [EDITOR]="$( command -v kak helix vim nano emacs | head -1 )"
     [SSH_AUTH_SOCK]="$( gpgconf --list-dirs agent-ssh-socket )"
     [SSH_AGENT_PID]="$( pgrep "gpg-agent" )"
 )

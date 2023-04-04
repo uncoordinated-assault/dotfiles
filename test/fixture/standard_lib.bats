@@ -1,14 +1,10 @@
 #!/usr/bin/env bats
 
 setup( ) {
-    REPOSITORY_PATH="$( realpath -Lm "$BATS_TEST_DIRNAME/../.." )"
+    load "../test/test_helper/bats-support/load"
+    load "../test/test_helper/bats-assert/load"
 
-    load "${REPOSITORY_PATH}/test/test_helper/bats-support/load"
-    load "${REPOSITORY_PATH}/test/test_helper/bats-assert/load"
-
-    load "${REPOSITORY_PATH}/dist/util/standard_lib"
-
-    PATH="${REPOSITORY_PATH}:$PATH"
+    load "../../dist/util/standard_lib"
 }
 
 # executable_exists

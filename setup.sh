@@ -22,7 +22,9 @@ declare -A SYMLINK_TARGETS_BARE=(
     ["$HOME/.bash_profile"]="dist/config/bare/setup_env.bash"
     ["$HOME/.bashrc"]="dist/config/bare/setup_shell.bash"
 
-    ["$HOME/.config/starship.toml"]="dist/config/bare/app/starship_config.toml"
+    ["$HOME/.tmux.conf"]="dist/config/bare/app/tmux.config"
+
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"]="dist/config/bare/app/starship_config.toml"
 
     ["$HOME/util"]="dist/util"
 )

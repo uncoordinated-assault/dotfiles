@@ -44,3 +44,11 @@ load "${REPOSITORY_ROOT}/dist/util/standard_lib.bash"
 
     assert_output "$REPOSITORY_ROOT"
 }
+
+# is_login_shell
+
+@test "is_login_shell: should function normally" {
+    run is_login_shell
+
+    assert_output "$( tty | grep -Eo "/dev/tty[0-9]+" | wc -l )"
+}

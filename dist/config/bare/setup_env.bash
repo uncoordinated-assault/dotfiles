@@ -32,12 +32,12 @@ DEFAULT_ENVIRONMENT["PATH"]="${UNIQUE_PATH:1:-1}"
 
 # Setup XDG_* variables if possible
 
-if [[ -f "$( realpath -Pm "$HOME/user-dirs.dirs" )" ]]; then
-    eval "$( grep -E "^[a-zA-Z_]+=\"\S+\"$" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs/user-dirs.dirs" )"
+if [[ -f "$( realpath -Pm "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )" ]]; then
+    eval "$( grep -E "^[a-zA-Z_]+=\"\S+\"$" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )"
 
     # no word-splitting guaranteed
     # shellcheck disable=2046
-    export $( grep -Eo "^[a-zA-Z_]+" .config/user-dirs.dirs | tr "\n" " " )
+    export $( grep -Eo "^[a-zA-Z_]+" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" | tr "\n" " " )
     :
 fi
 
@@ -54,7 +54,9 @@ unset -f DEFAULT_ENVIRONMENT OPTIONAL_PATHS DEFAULT_PATH UNIQUE_PATH
 if [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
     REQUIRED_VISUAL=( "$HOME/.xinitrc" "$HOME/.xserverrc" )
 
-    [[ "$( readlink "${REQUIRED_VISUAL[*]}" | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
+    # force whitespace argument split
+    # shellcheck disable=2048,2086
+    [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
 else
     exec "$( command -v zellij byobu tmux | head -1 )"
 fi

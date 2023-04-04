@@ -1,4 +1,4 @@
-name: Tests 
+name: Tests
 
 on:
   push:
@@ -20,13 +20,13 @@ on:
     - '.github/**'
 
 jobs:
-  test:
+  _:
     name: Perform testing on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-
+    steps:
     - uses: actions/checkout@v3
 
     - name: Setup Shellcheck & Bats
@@ -37,13 +37,13 @@ jobs:
 
     - name: Shellcheck
       run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )
-    
+
     - name: Bats
       run: bats -t $( find test/fixture -type f -name "*.bats" )
 
 
 
-    
+
 
 
 

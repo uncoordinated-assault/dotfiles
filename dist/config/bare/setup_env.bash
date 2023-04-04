@@ -60,5 +60,5 @@ if [[ "$( is_login_shell )" = 1 ]] && [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 
     # shellcheck disable=2048,2086
     [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
 elif [[ "$( is_login_shell )" = 1 ]]; then
-    exec "$( command -v zellij byobu tmux | head -1 )"
+    exec "$( command -v tmux byobu zellij | head -1 )"
 fi

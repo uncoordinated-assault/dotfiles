@@ -23,6 +23,8 @@ declare -A SYMLINK_TARGETS_BARE=(
     ["$HOME/.bashrc"]="dist/config/bare/setup_shell.bash"
 
     ["$HOME/.config/starship.toml"]="dist/config/bare/app/starship_config.toml"
+
+    ["$HOME/util"]="dist/util"
 )
 
 # Associative array indicating the symlinks for the `visual` setup mode

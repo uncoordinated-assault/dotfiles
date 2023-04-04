@@ -18,7 +18,7 @@ on:
     - '**.md'
     - '**.txt'
     - '.github/**'
-  workflow_dispatch:
+  workflow_dispatch: true
 
 jobs:
   _:
@@ -27,7 +27,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        submodules: recursive
+        submodules: true
 
     - name: Setup Shellcheck & Bats
       run: |

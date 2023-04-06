@@ -7,6 +7,7 @@ declare -A DEFAULT_ENVIRONMENT=(
     [EDITOR]="$( command -v kak helix vim nano emacs | head -1 )"
     [SSH_AUTH_SOCK]="$( gpgconf --list-dirs agent-ssh-socket 2> /dev/null )"
     [SSH_AGENT_PID]="$( pgrep "gpg-agent" )"
+    [GPG_TTY]="$( tty )"
 )
 
 # Inherit previously set $PATH from /etc/profile

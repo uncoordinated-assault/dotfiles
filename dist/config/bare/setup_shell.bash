@@ -32,7 +32,6 @@ declare -A PROGRAM_ALIASES=(
     [ls]="lsd -1 -l --icon never --date relative"
     [cat]="bat"
     [edit]="$EDITOR"
-    [tmux]="tmux new -As${USER:-default}"
 )
 
 for alias_name in "${!PROGRAM_ALIASES[@]}"; do

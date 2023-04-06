@@ -78,8 +78,13 @@ for symlink_path in "${!SYMLINK_TARGETS[@]}"; do
         :
     fi
 
-    # Perform the link, backing up existing files if possible
-    ln -S "old" -sbfv "$symlink_contents" "$symlink_path"
+    # Do a backup if $symlink_path is either a file or a directory
+    if [[ -e "$symlink_path" ]]; then
+        mv "$symlink_path" "${symlink_path}~"
+    fi
+
+    # Perform the link
+    ln -sfv "$symlink_contents" "$symlink_path"
 done
 
 # no word-splitting guaranteed

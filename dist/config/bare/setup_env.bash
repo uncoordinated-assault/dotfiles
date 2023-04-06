@@ -51,14 +51,14 @@ export "${!DEFAULT_ENVIRONMENT[@]}"
 
 unset -v DEFAULT_ENVIRONMENT OPTIONAL_PATHS DEFAULT_PATH UNIQUE_PATH
 
-# On login shell + Required files -> Start X
+# On login shell (asummed) + Required files -> Start X
 
-if [[ "$( is_login_shell )" = 1 ]] && [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
+if [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
     REQUIRED_VISUAL=( "$HOME/.xinitrc" "$HOME/.xserverrc" )
 
     # force whitespace argument split
     # shellcheck disable=2048,2086
     [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
-elif [[ "$( is_login_shell )" = 1 ]]; then
-    exec "$( command -v tmux byobu zellij | head -1 )"
+else
+    exec tmux new "-As${USER:-default}"
 fi

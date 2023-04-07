@@ -24,6 +24,9 @@ format = '$symbol '
 success_symbol = '[>](bright-black)'
 error_symbol = '[>](bright-black)'
 
+[username]
+disabled = true
+
 [hostname]
 disabled = true
 
@@ -34,7 +37,7 @@ style = 'bold purple'
 
 [git_branch]
 format = '\[[$symbol$branch]($style)\]'
-symbol = ""
+symbol = "@"
 style = 'bright-black'
 
 [git_status]
@@ -47,14 +50,14 @@ style = 'bright-black'
 
 [lua]
 format = '\[[$symbol($version)]($style)\]'
-version_format = 'v${major}.${minor}'
-symbol = ' '
+version_format = '${major}.${minor}'
+symbol = 'lua'
 
 [rust]
 format = '\[[$symbol($version)]($style)\]'
 version_format = 'v${major}.${minor}'
-symbol = ' '
+symbol = 'rust'
 
 [cmd_duration]
 min_time = 1
-format = '\[[$duration]($style)\] '
+format = '\[[$duration]($style)\]'

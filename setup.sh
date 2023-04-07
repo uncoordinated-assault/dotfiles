@@ -24,6 +24,8 @@ declare -A SYMLINK_TARGETS_BARE=(
 
     ["$HOME/.tmux.conf"]="dist/config/bare/app/tmux.config"
 
+    ["$HOME/.ssh/config"]="dist/config/bare/app/ssh.config"
+
     ["${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"]="dist/config/bare/app/starship_config.toml"
 
     ["$HOME/util"]="dist/util"

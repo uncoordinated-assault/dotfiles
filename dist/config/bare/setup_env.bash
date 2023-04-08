@@ -60,7 +60,12 @@ if [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
     # force whitespace argument split
     # shellcheck disable=2048,2086
     [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
-elif [[ -n "$SSH_CONNECTION" ]]; then
+elif [[ -n "$SSH_CONNECTION" ]] || [[ -n "$TERMUX_VERSION" ]]; then
+    # Start `gpg-agent` if running on Termux.
+    if [[ -n "$TERMUX_VERSION" ]] && [[ "$( pgrep "gpg-agent" | wc -l )" = 0 ]]; then
+       gpg-agent --daemon > /dev/null 2>&1 
+    fi
+    
     exec bash
 else 
     exec tmux new "-As${USER:-default}"

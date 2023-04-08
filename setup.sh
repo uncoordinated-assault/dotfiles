@@ -26,6 +26,8 @@ declare -A SYMLINK_TARGETS_BARE=(
 
     ["$HOME/.ssh/config"]="dist/config/bare/app/ssh.config"
 
+    ["$HOME/.gnupg/gpg-agent.conf"]="dist/config/bare/app/gpg-agent.config"
+
     ["${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"]="dist/config/bare/app/starship_config.toml"
 
     ["$HOME/util"]="dist/util"

@@ -60,6 +60,8 @@ if [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
     # force whitespace argument split
     # shellcheck disable=2048,2086
     [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
-else
+elif [[ -n "$SSH_CONNECTION" ]]; then
+    exec bash
+else 
     exec tmux new "-As${USER:-default}"
 fi

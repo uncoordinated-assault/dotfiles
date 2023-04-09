@@ -55,7 +55,7 @@ symbol = 'lua'
 
 [rust]
 format = '\[[$symbol($version)]($style)\]'
-version_format = 'v${major}.${minor}'
+version_format = '${major}.${minor}'
 symbol = 'rust'
 
 [cmd_duration]

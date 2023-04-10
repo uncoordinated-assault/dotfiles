@@ -33,7 +33,7 @@ declare -A PROGRAM_SETUP=(
     [eval:zoxide]="zoxide init bash"
     [eval:starship]="starship init bash"
     # refresh gnupg's target tty
-    [gpg-agent]="gpg-connect-agent updatestartuptty /bye 2>&1 > /dev/null"
+    [gpg-agent]="gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1"
 )
 
 for program_name in "${!PROGRAM_SETUP[@]}"; do

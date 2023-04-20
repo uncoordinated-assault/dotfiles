@@ -36,11 +36,11 @@ DEFAULT_ENVIRONMENT["PATH"]="${UNIQUE_PATH:1:-1}"
 # Setup XDG_* variables if possible
 
 if [[ -f "$( realpath -Pm "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )" ]]; then
-    eval "$( grep -E "^[a-zA-Z_]+=\"\S+\"$" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )"
+    eval "$( grep -E "^[A-Z_]+=\"\S+\"$" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )"
 
     # no word-splitting guaranteed
     # shellcheck disable=2046
-    export $( grep -Eo "^[a-zA-Z_]+" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" | tr "\n" " " )
+    export $( grep -Eo "^[A-Z_]+" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" | tr "\n" " " )
     :
 fi
 

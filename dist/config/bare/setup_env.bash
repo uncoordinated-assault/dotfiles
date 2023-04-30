@@ -12,7 +12,7 @@ declare -A DEFAULT_ENVIRONMENT=(
 
 # Inherit previously set $PATH from /etc/profile
 
-declare -a OPTIONAL_PATHS=( "." "$HOME/util" "$HOME/.local/bin" )
+declare -a OPTIONAL_PATHS=( "$HOME/util" "$HOME/.local/bin" )
 
 [ -d "$HOME/games/bin" ] && OPTIONAL_PATHS+=( "$HOME/games/bin" )
 

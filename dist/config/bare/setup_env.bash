@@ -16,6 +16,8 @@ declare -a OPTIONAL_PATHS=( "$HOME/util" "$HOME/.local/bin" )
 
 [ -d "$HOME/games/bin" ] && OPTIONAL_PATHS+=( "$HOME/games/bin" )
 
+[ -d "/opt/openresty/bin" ] && OPTIONAL_PATHS+=( "/opt/openresty/bin" )
+
 [ "$( executable_exists cargo )" = 1 ] && OPTIONAL_PATHS+=( "$HOME/.cargo/bin" )
 
 if [ "$( executable_exists luarocks )" = 1 ]; then
@@ -61,7 +63,6 @@ if [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
     # shellcheck disable=2048,2086
     [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
 elif [[ -n "$SSH_CONNECTION" ]] || [[ -n "$TERMUX_VERSION" ]]; then
-    
     exec bash
 else 
     exec tmux new "-As${USER:-default}"

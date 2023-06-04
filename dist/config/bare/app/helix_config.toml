@@ -14,7 +14,7 @@ hidden = false
 
 [editor.whitespace.render]
 space = "none"
-tab = "none"
+tab = "all"
 newline = "none"
 
 [editor.whitespace.characters]

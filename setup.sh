@@ -67,7 +67,7 @@ for symlink_path in "${!SYMLINK_TARGETS[@]}"; do
     resource_path="${SYMLINK_TARGETS["$symlink_path"]}"
     symlink_dirname="$( dirname "$symlink_path" )"
 
-    # Create paremt directories for the symlink path
+    # Create parent directories for the symlink path
     mkdir -vp "$symlink_dirname"
 
     symlink_contents="$( relative_to "$symlink_dirname" "${CURRENT_DIRECTORY}/${resource_path}" )"

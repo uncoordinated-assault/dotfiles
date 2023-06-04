@@ -27,13 +27,27 @@ if [ "$( executable_exists luarocks )" = 1 ]; then
     DEFAULT_ENVIRONMENT[LUA_CPATH]="$( luarocks path --lr-cpath )"
 fi
 
-DEFAULT_PATH=$( echo "$PATH" | tr ":" " " )
+declare -a DEFAULT_PATH=( $( echo "$PATH" | tr ":" " " ) )
 
-DEFAULT_PATH+=( "${OPTIONAL_PATHS[*]}")
+DEFAULT_PATH+=( "${OPTIONAL_PATHS[*]}" )
 
-UNIQUE_PATH=$( echo -n "${DEFAULT_PATH[*]}" | tr ":" " " | tr " " "\n" | sort -u | tr "\n" ":" )
+AWK_DUPLICATE_REMOVER='
+BEGIN {
+    RS = ":"
+}
 
-DEFAULT_ENVIRONMENT["PATH"]="${UNIQUE_PATH:1:-1}"
+{
+    sub(sprintf("%c$", 10), "")
+    if (A[$0]) {
+        # Do nothing
+    } else {
+        A[$0] = 1
+        printf((NR == 1 ? "" : ":") $0)
+    }
+}
+'
+
+DEFAULT_ENVIRONMENT["PATH"]="$(echo -ne "${DEFAULT_PATH[*]}" | tr -d "\n" | tr "[:space:]" ":" | awk "$AWK_DUPLICATE_REMOVER")"
 
 # Setup XDG_* variables if possible
 
@@ -64,6 +78,6 @@ if [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
     [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
 elif [[ -n "$SSH_CONNECTION" ]] || [[ -n "$TERMUX_VERSION" ]]; then
     exec bash
-else 
+else
     exec tmux new "-As${USER:-default}"
 fi

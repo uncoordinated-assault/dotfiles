@@ -27,6 +27,10 @@ declare -A SYMLINK_TARGETS_SYSTEM=(
     ["/etc/kernel/cmdline"]="dist/config/system/kernel/cmdline"
 
     ["/etc/mkinitcpio.conf"]="dist/config/system/kernel/mkinitcpio.config"
+
+    ["/etc/vconsole.conf"]="dist/config/system/vconsole.config"
+
+    ["/etc/kmscon/kmscon.conf"]="dist/config/system/kmscon.config"
 )
 
 # Associative array indicating the symlinks for the `bare` setup mode

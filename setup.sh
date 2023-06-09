@@ -42,6 +42,8 @@ declare -A SYMLINK_TARGETS_VISUAL=(
 
     ["$HOME/.i3wm"]="dist/config/visual/app/i3wm.config"
 
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"]="dist/config/visual/app/hyprland.config"
+
     ["$HOME/.picom"]="dist/config/visual/app/picom.config"
 
     ["${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"]="dist/config/visual/app/common_directories.config"

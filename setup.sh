@@ -3,7 +3,7 @@
 SETUP_MODE="${1:-bare}"
 
 case "$SETUP_MODE" in
-    "bare"|"visual")
+    "bare"|"visual"|"system")
         :
         ;;
     *)
@@ -12,10 +12,22 @@ case "$SETUP_MODE" in
         ;;
 esac
 
+if [ "$EUID" != 0 ] && [ "$SETUP_MODE" = "system" ]; then
+    printf "E: setup mode \`%s\` requires root privileges\n" "$SETUP_MODE"
+
+    exit 1
+fi
+
 CURRENT_FILE="$( pwd -L )/${0}"
 CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
 
 [ -f "$CURRENT_DIRECTORY/dist/util/standard_lib.bash" ] && source "$CURRENT_DIRECTORY/dist/util/standard_lib.bash"
+
+declare -A SYMLINK_TARGETS_SYSTEM=(
+    ["/etc/kernel/cmdline"]="dist/config/system/kernel/cmdline"
+
+    ["/etc/mkinitcpio.conf"]="dist/config/system/kernel/mkinitcpio.config"
+)
 
 # Associative array indicating the symlinks for the `bare` setup mode
 declare -A SYMLINK_TARGETS_BARE=(
@@ -43,6 +55,9 @@ declare -A SYMLINK_TARGETS_VISUAL=(
     ["$HOME/.i3wm"]="dist/config/visual/app/i3wm.config"
 
     ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"]="dist/config/visual/app/hyprland.config"
+
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/config"]="dist/config/visual/app/waybar.config"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/style.css"]="dist/config/visual/app/waybar-style.css"
 
     ["$HOME/.picom"]="dist/config/visual/app/picom.config"
 

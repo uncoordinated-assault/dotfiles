@@ -8,6 +8,8 @@ declare -A DEFAULT_ENVIRONMENT=(
     [SSH_AUTH_SOCK]="$( gpgconf --list-dirs agent-ssh-socket 2> /dev/null )"
     [SSH_AGENT_PID]="$( pgrep "gpg-agent" )"
     [GPG_TTY]="$( tty )"
+
+    [visual:XDG_SESSION_TYPE]="Xorg"
 )
 
 # Inherit previously set $PATH from /etc/profile
@@ -27,10 +29,12 @@ if [ "$( executable_exists luarocks )" = 1 ]; then
     DEFAULT_ENVIRONMENT[LUA_CPATH]="$( luarocks path --lr-cpath )"
 fi
 
+# shellcheck disable=2207
 declare -a DEFAULT_PATH=( $( echo "$PATH" | tr ":" " " ) )
 
 DEFAULT_PATH+=( "${OPTIONAL_PATHS[*]}" )
 
+# shellcheck disable=2016
 AWK_DUPLICATE_REMOVER='
 BEGIN {
     RS = ":"
@@ -60,20 +64,54 @@ if [[ -f "$( realpath -Pm "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )" 
     :
 fi
 
+declare -A ENVIRONMENT_TARGETS=(
+    [bare]=0
+    [visual]=0
+)
+
+[[ -n "${DISPLAY}" ]] && [[ "$XDG_VTNR" != 1 ]] && ENVIRONMENT_TARGETS["bare"]=1
+
+[[ -z "${DISPLAY}" ]] && [[ "$XDG_VTNR" = 1 ]] && ENVIRONMENT_TARGETS["visual"]=1
+
+declare -a EXPORT_TARGETS=()
+
 for var_name in "${!DEFAULT_ENVIRONMENT[@]}"; do
-    declare "$var_name"="${DEFAULT_ENVIRONMENT["$var_name"]}"
+    var_value="${DEFAULT_ENVIRONMENT["$var_name"]}"
+
+    if (
+        shopt -s nocasematch;
+        [[ "$var_name" =~ ^(bare|visual): ]]
+    ); then
+       
+        var_name="$( echo "$var_name" | grep -Po "(?i)^(bare|visual):\K([a-z_][a-z_0-9]*)$" )"
+        
+        EXPORT_TARGETS+=( "$var_name" )
+       
+        if (
+            shopt -s nocasematch;
+            [[ "$var_name" =~ ^bare: ]]
+        ) && [[ "${ENVIRONMENT_TARGETS["bare"]}" = 1 ]]; then
+            declare "${var_name}=${var_value}"
+        elif (
+            shopt -s nocasematch;
+            [[ "$var_name" =~ ^visual: ]]
+        ) && [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then
+            declare "${var_name}=${var_value}"
+        fi
+    else
+        EXPORT_TARGETS+=( "$var_name" )
+
+        declare "${var_name}=${var_value}"
+    fi
 done
 
-export "${!DEFAULT_ENVIRONMENT[@]}"
-
-unset -v DEFAULT_ENVIRONMENT OPTIONAL_PATHS DEFAULT_PATH UNIQUE_PATH
+export "${EXPORT_TARGETS[@]}"
 
 # On login shell (asummed) + Required files -> Start X
 
-if [[ -z "$DISPLAY" ]] && [[ "$XDG_VTNR" = 1 ]]; then
+if [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then
     REQUIRED_VISUAL=( "$HOME/.xinitrc" "$HOME/.xserverrc" )
 
-    # force whitespace argument split
     # shellcheck disable=2048,2086
     [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
 elif [[ -n "$SSH_CONNECTION" ]] || [[ -n "$TERMUX_VERSION" ]]; then

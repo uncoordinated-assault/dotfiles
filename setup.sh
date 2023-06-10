@@ -23,6 +23,7 @@ CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
 
 [ -f "$CURRENT_DIRECTORY/dist/util/standard_lib.bash" ] && source "$CURRENT_DIRECTORY/dist/util/standard_lib.bash"
 
+# shellcheck disable=2034
 declare -A SYMLINK_TARGETS_SYSTEM=(
     ["/etc/kernel/cmdline"]="dist/config/system/kernel/cmdline"
 
@@ -93,6 +94,12 @@ for symlink_path in "${!SYMLINK_TARGETS[@]}"; do
 
     symlink_contents="$( relative_to "$symlink_dirname" "${CURRENT_DIRECTORY}/${resource_path}" )"
 
+    if [[ "$SETUP_MODE" = "system" ]]; then
+        cp -bvr "$resource_path" "$symlink_path"
+
+        continue
+    fi
+
     # If we are dealing with an already existing symlink and it doesn't point to our resource file, proceed to delete it
     # but if an already existing symlink points to our resource file, do nothing
     if [[ "$( readlink "$symlink_path" | wc -l )" != 0 ]]; then
@@ -102,7 +109,6 @@ for symlink_path in "${!SYMLINK_TARGETS[@]}"; do
             printf "skipped \`%s\` due to existing link\n" "$symlink_path"
             continue
         fi
-        :
     fi
 
     # Do a backup if $symlink_path is either a file or a directory

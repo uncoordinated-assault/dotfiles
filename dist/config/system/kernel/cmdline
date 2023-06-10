@@ -1,1 +1,1 @@
-root=/dev/default/rootfs resume=/dev/default/swap cryptdevice=LABEL=system:system:allow-discards rw quiet bgrt_disable nvidia_drm.modeset=1
+root=/dev/default/rootfs cryptdevice=LABEL=system:system:allow-discards rw quiet bgrt_disable

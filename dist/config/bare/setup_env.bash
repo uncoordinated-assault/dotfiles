@@ -107,6 +107,26 @@ done
 
 export "${EXPORT_TARGETS[@]}"
 
+# Dynamic initialization process
+
+# -> Add secret authentication subkeys to .gnupg/sshcontrol automatically
+
+# shellcheck disable=2207
+declare -a keygrip_list=( $( gpg -K --with-keygrip | grep -P -A1 "\[.*A.*\]$" | grep -Po "^\s+Keygrip\s+=\s+\K([0-9A-F]+)$" | tr "\n" " " ) )
+
+mkdir -vp "$HOME/.gnupg"
+
+touch "$HOME/.gnupg/sshcontrol"
+
+for keygrip in "${keygrip_list[@]}"; do
+    if ! grep -q "$keygrip" "$HOME/.gnupg/sshcontrol"; then
+        printf "%s 300\n" "$keygrip" >> "$HOME/.gnupg/sshcontrol" 
+    fi
+done
+
+# -> Start libinput-gestures
+systemctl --user start libinput-gestures
+
 # On login shell (asummed) + Required files -> Start X
 
 if [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then

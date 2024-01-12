@@ -127,13 +127,10 @@ done
 # -> Start libinput-gestures
 systemctl --user start libinput-gestures
 
-# On login shell (asummed) + Required files -> Start X
+# On login shell (asummed) + Required files -> Start visual session
 
-if [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then
-    REQUIRED_VISUAL=( "$HOME/.xinitrc" "$HOME/.xserverrc" )
-
-    # shellcheck disable=2048,2086
-    [[ "$( readlink ${REQUIRED_VISUAL[*]} | wc -l )" = "${#REQUIRED_VISUAL[*]}" ]] && exec xinit
+if [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then   
+    exec Hyprland > "$HOME/.hyprland.log" 2>&1
 elif [[ -n "$SSH_CONNECTION" ]] || [[ -n "$TERMUX_VERSION" ]]; then
     exec bash
 else

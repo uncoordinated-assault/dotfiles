@@ -1,1 +1,1 @@
-root=/dev/default/rootfs resume=/dev/default/swap cryptdevice=LABEL=system:system:allow-discards rw quiet bgrt_disable
+root=/dev/default/rootfs resume=/dev/default/swap cryptdevice=LABEL=encryption-layer:encryption-layer:allow-discards rw quiet splash

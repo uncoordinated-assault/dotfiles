@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+[ -f "$HOME/util/standard_lib.bash" ] && source "$HOME/util/standard_lib.bash"
+
+# -> Setup session-wide proxy.
+if [ "$( executable_exists pass )" = 1 ]; then
+    pass_output="$( bash --init-file <( echo -ne "pass show proxy/default; exit" ) )"
+
+    if [ "$( echo -ne "$pass_output" | grep -Po "^Error: .*$" | wc -l )" = 0 ]; then
+        proxy_password="$( echo -ne "$pass_output" | head -1 )"
+
+        pass_output="$( echo -ne "$pass_output" | grep -Po "^([a-zA-z]+):\s+\K(.+)" )"
+
+        proxy_username="$( echo -ne "$pass_output" | head -1 )"
+        
+        proxy_url="$( echo -ne "$pass_output" | tail -1 )"
+
+        unset pass_output
+
+        proxy_protocol="$( echo -ne "$proxy_url" | grep -Po "^\K([a-z0-9]+)" )"
+        
+        proxy_domain="$( echo -ne "$proxy_url" | grep -Po "^([a-z0-9]+)://\K(.+)$" )"
+
+        echo "$proxy_domain"
+
+        proxy="$(printf "%s://%s:%s@%s" "$proxy_protocol" "$proxy_username" "$proxy_password" "$proxy_domain")"
+
+        unset proxy_url
+        unset proxy_protocol
+        unset proxy_domain
+        unset proxy_username
+        unset proxy_password
+    
+        declare -a TARGET_IDENTIFIERS=("HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "RSYNC_PROXY")
+
+        for identifier in "${TARGET_IDENTIFIERS[@]}"; do
+            TARGET_IDENTIFIERS+=("$( echo -ne "$identifier" | tr "[:lower:]" "[:upper:]" )")
+        done
+
+        for identifier in "${TARGET_IDENTIFIERS[@]}"; do
+            hyprctl keyword env "${identifier},${proxy}"
+        done
+
+        unset TARGET_IDENTIFIERS
+    fi
+fi
+
+{
+  active_windows="$(hyprctl clients -j | jq -r '.[].pid' )"
+
+  for active_window in $active_windows; do
+    process_executable="$(readlink -f "/proc/${active_window}/exe")"
+    process_cmdline="$(readlink -f "/proc/${active_window}/cmdline")"
+    printf "process_executable: %s\nprocess_cmdline: %s\n\n" "$process_executable" "$process_cmdline"
+
+    wine_process=0
+
+    if [ "$(basename "$process_executable" | grep -P "^wine.*$" | wc -l)" != 0 ]; then
+      wine_process=1
+    fi
+
+    hyprctl clients -j | jq -r ".[] | select( .pid == ${active_window} )"
+
+    echo "$wine_process"
+    
+  done
+}

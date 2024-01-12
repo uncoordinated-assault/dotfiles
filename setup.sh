@@ -29,6 +29,10 @@ declare -A SYMLINK_TARGETS_SYSTEM=(
 
     ["/etc/mkinitcpio.conf"]="dist/config/system/kernel/mkinitcpio.config"
 
+    ["/etc/modprobe.d/amdgpu.conf"]="dist/config/system/kernel/amdgpu.config"
+
+    ["/etc/modprobe.d/disable-webcam.conf"]="dist/config/system/kernel/disable-webcam.config"
+
     ["/etc/vconsole.conf"]="dist/config/system/vconsole.config"
 
     ["/etc/kmscon/kmscon.conf"]="dist/config/system/kmscon.config"
@@ -57,22 +61,27 @@ declare -A SYMLINK_TARGETS_VISUAL=(
     ["$HOME/.xinitrc"]="dist/config/visual/setup_desktop.bash"
     ["$HOME/.xserverrc"]="dist/config/visual/setup_server.bash"
 
-    ["$HOME/.i3wm"]="dist/config/visual/app/i3wm.config"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config.ini"]="dist/config/visual/app/polybar.config"
 
     ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"]="dist/config/visual/app/hyprland.config"
 
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/config"]="dist/config/visual/app/waybar.config"
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/style.css"]="dist/config/visual/app/waybar-style.css"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/themes"]="dist/config/visual/app/hyprland-themes"
 
-    ["$HOME/.picom"]="dist/config/visual/app/picom.config"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/i3/config"]="dist/config/visual/app/i3wm.config"
+
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/libinput-gestures.service.d/env-override.conf"]="dist/config/visual/app/libinput-gestures.override"
+
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/libinput-gestures.conf"]="dist/config/visual/app/libinput-gestures.config"
+
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/picom/picom.conf"]="dist/config/visual/app/picom.config"
 
     ["${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"]="dist/config/visual/app/common_directories.config"
 
-    ["$HOME/.alacritty.yaml"]="dist/config/visual/app/alacritty.config.yaml"
-    ["$HOME/.alacritty.theme.yaml"]="dist/config/visual/app/alacritty.theme.yaml"
+    ["$HOME/.alacritty.toml"]="dist/config/visual/app/alacritty.config.toml"
+    ["$HOME/.alacritty.theme.toml"]="dist/config/visual/app/alacritty.theme.toml"
 
-    ["$HOME/.rofi"]="dist/config/visual/app/rofi.config"
-    ["$HOME/.rofi_themes"]="dist/config/visual/app/rofi_themes"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"]="dist/config/visual/app/rofi.config"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/rofi/themes"]="dist/config/visual/app/rofi_themes"
 )
 
 # Inherit from `bare` setup for `visual` setup

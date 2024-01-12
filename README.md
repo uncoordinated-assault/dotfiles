@@ -13,12 +13,14 @@ The installation process is fairly straightforward:
 - The `bare` mode is what you would call `the minimalistic setup`, it contains just enough for the initialization of both my system and my development environment .
 - The `visual` mode is what you would call `the full setup`, it inherits from the `bare` mode and it contains the following:
     - Provides both `.xinitrc` and `.xserverrc` files required for the `X Server`.
+    - Provides a working wayland environment.
     - Configuration files for the following programs:
         - `i3 window manager`.
+        - `hyprland`
         - `rofi` .
         - `picom` .
         - `alacritty` .
-    - A spice of love.
+    -Some visual satisfaction.
 
 Things said, lets move onto the _actual_ setup process.
 
@@ -31,7 +33,7 @@ The ``[setup_mode(...)]?`` section indicates that it takes an optional argument,
 
 And finally, the ``[(...)="bare"](...)`` section indicates that this argument has a value of ``"bare"`` as the default one.
 
-**Tip**: You must give the `setup.sh` script executable permissions, otherwise it will not be invoked.
+**Note**: You must give the `setup.sh` script executable permissions, otherwise it will not be invoked.
 
 You may do so with the following:
 ```sh

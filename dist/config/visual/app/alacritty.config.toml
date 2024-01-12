@@ -1,0 +1,43 @@
+import = ["~/.alacritty.theme.toml"]
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+style = "Block"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.normal]
+family = "Iosevka Nerd Font"
+style = "Regular"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[shell]
+program = "/usr/bin/bash"
+
+[window]
+opacity = 1
+
+[window.padding]
+x = 0
+y = 0

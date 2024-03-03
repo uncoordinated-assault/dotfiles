@@ -9,6 +9,8 @@ declare -A DEFAULT_ENVIRONMENT=(
     [SSH_AGENT_PID]="$( pgrep "gpg-agent" )"
     [GPG_TTY]="$( tty )"
 
+    [LIBCLANG_PATH]="/usr/local/lib"
+
     [visual:XDG_SESSION_TYPE]="Xorg"
 )
 

@@ -6,7 +6,7 @@ temporary_file="/tmp/${random_name}"
 
 cat - > "$temporary_file"
 
-cat "$temporary_file" | wl-copy
+wl-copy < "$temporary_file"
 
 if [ "$( wc -l < "${temporary_file}" )" != 0 ]; then
   if scp "${temporary_file}" "overtake.dev:/srv/http/static/uploads/${random_name}"; then

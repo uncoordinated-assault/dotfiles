@@ -54,6 +54,8 @@ declare -A SYMLINK_TARGETS_BARE=(
     ["${XDG_CONFIG_HOME:-$HOME/.config}/helix/config.toml"]="dist/config/bare/app/helix_config.toml"
 
     ["$HOME/util"]="dist/util"
+
+    ["$HOME/.tmux/plugins/tpm"]="dist/config/bare/app/tmux-tpm"
 )
 
 # Associative array indicating the symlinks for the `visual` setup mode

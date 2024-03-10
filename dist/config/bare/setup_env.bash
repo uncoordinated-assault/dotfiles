@@ -127,7 +127,7 @@ for keygrip in "${keygrip_list[@]}"; do
 done
 
 # -> Start libinput-gestures
-systemctl --user start libinput-gestures
+[ "$( executable_exists systemctl )" = 1 ] && systemctl --user start libinput-gestures
 
 # On login shell (asummed) + Required files -> Start visual session
 

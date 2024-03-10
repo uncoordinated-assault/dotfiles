@@ -46,4 +46,4 @@ jobs:
     - name: Initial Setup
       run: sudo apt update && sudo apt install shellcheck
 
-    - run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" )
+    - run: shellcheck --shell=bash $( find dist setup.sh -type f -name "*.sh" -not -path "dist/config/bare/app/tmux-tpm" )

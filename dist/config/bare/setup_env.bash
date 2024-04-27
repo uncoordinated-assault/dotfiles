@@ -136,5 +136,5 @@ if [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then
 elif [[ -n "$SSH_CONNECTION" ]] || [[ -n "$TERMUX_VERSION" ]]; then
     exec bash
 else
-    exec tmux new "-As${USER:-default}"
+    tmux new "-As${USER:-default}"
 fi

@@ -43,16 +43,16 @@ for program_name in "${!PROGRAM_SETUP[@]}"; do
 
     if (
         shopt -s nocasematch;
-        [[ "$program_name" =~ ^eval: ]]    
+        [[ "$program_name" =~ ^eval: ]]
     ); then
         should_eval=1
-        
+
         program_name="$( echo "$program_name" | grep -Po "(?i)^eval:\K([a-z_][a-z_0-9]*)" )"
     fi
 
     if [[ "$( executable_exists "$program_name" )" = 1 ]]; then
         if [[ "$should_eval" = 1 ]]; then
-            eval "$( $program_cmd )"    
+            eval "$( $program_cmd )"
         else
             eval "$program_cmd"
         fi

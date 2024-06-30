@@ -30,7 +30,13 @@ is_same_file( ) {
     else
         echo -ne "0"
     fi
-} 
+}
+
+service_exists( ) {
+    target_service=$1
+
+    [ "$( systemctl list-units --user 2>&1 | grep "${target_service}" | wc -l )" -ge 1 ] && echo -ne "1" || echo -ne "0"
+}
 
 # explicit word-splitting
 # shellcheck disable=2046

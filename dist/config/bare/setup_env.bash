@@ -84,11 +84,11 @@ for var_name in "${!DEFAULT_ENVIRONMENT[@]}"; do
         shopt -s nocasematch;
         [[ "$var_name" =~ ^(bare|visual): ]]
     ); then
-       
+
         var_name="$( echo "$var_name" | grep -Po "(?i)^(bare|visual):\K([a-z_][a-z_0-9]*)$" )"
-        
+
         EXPORT_TARGETS+=( "$var_name" )
-       
+
         if (
             shopt -s nocasematch;
             [[ "$var_name" =~ ^bare: ]]
@@ -122,16 +122,16 @@ touch "$HOME/.gnupg/sshcontrol"
 
 for keygrip in "${keygrip_list[@]}"; do
     if ! grep -q "$keygrip" "$HOME/.gnupg/sshcontrol"; then
-        printf "%s 300\n" "$keygrip" >> "$HOME/.gnupg/sshcontrol" 
+        printf "%s 300\n" "$keygrip" >> "$HOME/.gnupg/sshcontrol"
     fi
 done
 
 # -> Start libinput-gestures
-[ "$( executable_exists systemctl )" = 1 ] && systemctl --user start libinput-gestures
+[ "$( executable_exists systemctl )" = 1 ] && [ "$( service_exists libinput-gestures )" = 1 ] && systemctl --user start libinput-gestures 2>/dev/null >&2
 
 # On login shell (asummed) + Required files -> Start visual session
 
-if [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then   
+if [[ "${ENVIRONMENT_TARGETS["visual"]}" = 1 ]]; then
     exec Hyprland > "$HOME/.hyprland.log" 2>&1
 elif [[ -n "$SSH_CONNECTION" ]] || [[ -n "$TERMUX_VERSION" ]]; then
     exec bash

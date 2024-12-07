@@ -1,3 +1,4 @@
+[general]
 import = ["~/.alacritty.theme.toml"]
 live_config_reload = true
 
@@ -32,7 +33,7 @@ multiplier = 3
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/bash"
 
 [window]
@@ -41,3 +42,5 @@ opacity = 1
 [window.padding]
 x = 0
 y = 0
+
+[terminal]

@@ -1,1 +1,0 @@
-root=/dev/default/rootfs resume=/dev/default/swap cryptdevice=LABEL=encryption-layer:encryption-layer:allow-discards rw quiet splash

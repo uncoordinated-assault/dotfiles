@@ -3,7 +3,7 @@
 SETUP_MODE="${1:-bare}"
 
 case "$SETUP_MODE" in
-    "bare"|"visual"|"system")
+    "bare"|"visual")
         :
         ;;
     *)
@@ -23,25 +23,13 @@ CURRENT_DIRECTORY=$( dirname "$CURRENT_FILE" )
 
 [ -f "$CURRENT_DIRECTORY/dist/util/standard_lib.bash" ] && source "$CURRENT_DIRECTORY/dist/util/standard_lib.bash"
 
-# shellcheck disable=2034
-declare -A SYMLINK_TARGETS_SYSTEM=(
-    ["/etc/kernel/cmdline"]="dist/config/system/kernel/cmdline"
-
-    ["/etc/mkinitcpio.conf"]="dist/config/system/kernel/mkinitcpio.config"
-
-    ["/etc/modprobe.d/amdgpu.conf"]="dist/config/system/kernel/amdgpu.config"
-
-    ["/etc/modprobe.d/disable-webcam.conf"]="dist/config/system/kernel/disable-webcam.config"
-
-    ["/etc/vconsole.conf"]="dist/config/system/vconsole.config"
-
-    ["/etc/kmscon/kmscon.conf"]="dist/config/system/kmscon.config"
-)
 
 # Associative array indicating the symlinks for the `bare` setup mode
 declare -A SYMLINK_TARGETS_BARE=(
-    ["$HOME/.bash_profile"]="dist/config/bare/setup_env.bash"
-    ["$HOME/.bashrc"]="dist/config/bare/setup_shell.bash"
+    ["$HOME/.bash_profile"]="dist/config/bare/setup-env.bash"
+    ["$HOME/.bashrc"]="dist/config/bare/setup-shell.bash"
+
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"]="dist/config/bare/app/common-directories.config"
 
     ["$HOME/.tmux.conf"]="dist/config/bare/app/tmux.config"
 
@@ -49,9 +37,9 @@ declare -A SYMLINK_TARGETS_BARE=(
 
     ["$HOME/.gnupg/gpg-agent.conf"]="dist/config/bare/app/gpg-agent.config"
 
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"]="dist/config/bare/app/starship_config.toml"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"]="dist/config/bare/app/starship-config.toml"
 
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/helix/config.toml"]="dist/config/bare/app/helix_config.toml"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/helix/config.toml"]="dist/config/bare/app/helix-config.toml"
 
     ["$HOME/util"]="dist/util"
 
@@ -60,11 +48,6 @@ declare -A SYMLINK_TARGETS_BARE=(
 
 # Associative array indicating the symlinks for the `visual` setup mode
 declare -A SYMLINK_TARGETS_VISUAL=(
-    ["$HOME/.xinitrc"]="dist/config/visual/setup_desktop.bash"
-    ["$HOME/.xserverrc"]="dist/config/visual/setup_server.bash"
-
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config.ini"]="dist/config/visual/app/polybar.config"
-    
     ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/config"]="dist/config/visual/app/waybar.config"
     ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/style.css"]="dist/config/visual/app/waybar-style.css"
 
@@ -72,21 +55,9 @@ declare -A SYMLINK_TARGETS_VISUAL=(
 
     ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/themes"]="dist/config/visual/app/hyprland-themes"
 
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/i3/config"]="dist/config/visual/app/i3wm.config"
-
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/libinput-gestures.service.d/env-override.conf"]="dist/config/visual/app/libinput-gestures.override"
-
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/libinput-gestures.conf"]="dist/config/visual/app/libinput-gestures.config"
-
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/picom/picom.conf"]="dist/config/visual/app/picom.config"
-
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"]="dist/config/visual/app/common_directories.config"
 
     ["$HOME/.alacritty.toml"]="dist/config/visual/app/alacritty.config.toml"
     ["$HOME/.alacritty.theme.toml"]="dist/config/visual/app/alacritty.theme.toml"
-
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"]="dist/config/visual/app/rofi.config"
-    ["${XDG_CONFIG_HOME:-$HOME/.config}/rofi/themes"]="dist/config/visual/app/rofi_themes"
 )
 
 # Inherit from `bare` setup for `visual` setup

@@ -1,1 +1,22 @@
-hyprland
+# Desktop
+hypr{land,idle}
+swaylock
+rofi # with wayland support
+swww
+
+# Media
+pipewire{,-}
+pamixer
+wireplumber
+bluez{,-utils}
+brightnessctl
+slurp
+grim
+
+# Fonts
+{noto,nerd}-fonts
+
+# Miscenalleous
+jq
+btop
+tmux

@@ -25,7 +25,9 @@ success_symbol = '[>](bright-black)'
 error_symbol = '[>](bright-black)'
 
 [username]
-disabled = true
+disabled = false
+show_always = true
+format = '[$user]($style) @ '
 
 [hostname]
 disabled = true

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ -f "$HOME/util/standard_lib.bash" ] && source "$HOME/util/standard_lib.bash"
+[ -f "$HOME/util/standard-lib.bash" ] && source "$HOME/util/standard-lib.bash"
 
 declare -A DEFAULT_ENVIRONMENT=(
     [ARCH]="$( uname -m )"
@@ -125,9 +125,6 @@ for keygrip in "${keygrip_list[@]}"; do
         printf "%s 300\n" "$keygrip" >> "$HOME/.gnupg/sshcontrol"
     fi
 done
-
-# -> Start libinput-gestures
-[ "$( executable_exists systemctl )" = 1 ] && [ "$( service_exists libinput-gestures )" = 1 ] && systemctl --user start libinput-gestures 2>/dev/null >&2
 
 # On login shell (asummed) + Required files -> Start visual session
 

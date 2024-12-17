@@ -1,5 +1,3 @@
- [![Continous Integration](https://github.com/wfrsk/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/wfrsk/dotfiles/actions/workflows/ci.yml) <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"/>
-
 # What is this?
 
 This is the repository where _most of_ my initialization and configuration files live in, these files are a core section of my daily development workflow.
@@ -7,7 +5,8 @@ This is the repository where _most of_ my initialization and configuration files
 # The installation process
 
 The installation process is determined by *mode*s, they are defined as follows:
-- `bare`, this mode includes tmux 
+- `bare`, this mode includes basic terminal needs, such as prompt, multiplexer, shell initialization, XDG file structure..
+- `visual`, this mode includes the visual needs, such as wayland compositor, locking, the desktop itself..
 
 # License
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ -f "$HOME/util/standard_lib.bash" ] && source "$HOME/util/standard_lib.bash"
+[ -f "$HOME/util/standard-lib.bash" ] && source "$HOME/util/standard-lib.bash"
 
 declare -A DEFAULT_VARIABLES=(
     # for pinentry to work inside tmux

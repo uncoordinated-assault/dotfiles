@@ -1,0 +1,136 @@
+/* rofi application launcher */
+
+configuration {
+    modi: "drun";
+    show-icons: false;
+    terminal: "sh -c '[ \"$(ps -u$USER | grep -i \"alacritty\" | wc -l)\" = 1 ] && exec alacritty msg create-window || exec alacritty'";
+    drun-display-format: "{icon} {name}";
+    matching: "prefix";
+    location: 0;
+    disable-history: true;
+    hide-scrollbar: true;
+    display-drun: "   apps ";
+    sidebar-mode: true;
+    drun {
+        /** Scan the current users desktop for desktop files. */
+        scan-desktop: true;
+        /** Parse user desktop files. */
+        parse-user:   true;
+        /** Parse system desktop files. */
+        parse-system: false;
+    }
+}
+
+@theme "~/.visual/rofi.user/theme.user/base.default.theme.rasi"
+
+* {
+    background-color: @background-0;
+    foreground-color: @foreground-0;
+
+    accent-color: @accent-3;
+
+    border-color: @accent-color;
+
+    selected-color: @background-3;
+
+    width: 600;
+    font: "JetBrainsMono Nerd Font 14";
+}
+
+element-text, element-icon, mode-switcher {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+window {
+    height: 360px;
+    border: 3px;
+    border-color: @border-color;
+    background-color: @background-color;
+}
+
+mainbox {
+    background-color: @background-color;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @background-color;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+prompt {
+    background-color: @accent-color;
+    padding: 6px;
+    text-color: @background-color;
+    border-radius: 3px;
+    margin: 20px 0px 0px 20px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    padding: 6px;
+    margin: 20px 0px 0px 10px;
+    text-color: @foreground-color;
+    background-color: @background-color;
+}
+
+listview {
+    border: 0px 0px 0px;
+    padding: 6px 0px 0px;
+    margin: 10px 0px 0px 20px;
+    columns: 2;
+    lines: 5;
+    background-color: @background-color;
+}
+
+element {
+    padding: 5px;
+    background-color: @background-color;
+    text-color: @foreground-color;
+}
+
+element-icon {
+    size: 25px;
+}
+
+element selected {
+    background-color:  @selected-color;
+    text-color: @foreground-color;
+}
+
+mode-switcher {
+    spacing: 0;
+}
+
+button {
+    padding: 10px;
+    background-color: @background-color;
+    text-color: @accent-color;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+button selected {
+  background-color: @background-color;
+  text-color: @accent-color;
+}
+
+message {
+    background-color: @background-color;
+    margin: 2px;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+textbox {
+    padding: 6px;
+    margin: 20px 0px 0px 20px;
+    text-color: @accent-color;
+    background-color: @background-color;
+}

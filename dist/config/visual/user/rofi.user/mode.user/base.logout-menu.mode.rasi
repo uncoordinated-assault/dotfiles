@@ -1,0 +1,82 @@
+configuration {
+  modi:                     "drun";
+  show-icons:               false;
+  font:                     "JetBrainsMono Nerd Font Bold 8";
+}
+
+@theme "~/.visual/rofi.user/theme.user/base.default.theme.rasi"
+
+/* Main Window */
+
+window {
+  enabled:                  true;
+  location:                 northeast;
+  anchor:                   north;
+  x-offset:                 -3px;
+  y-offset:                 3px;
+  height:                   178px;
+  width:                    150px;
+  border:                   1px;
+  border-radius:            4px;
+  border-color:             @accent-3;
+  background-color:         @background-0;
+
+  children:                 [ "mainbox" ];
+}
+
+/* Main Container */
+
+mainbox {
+  enabled:                  true;
+  background-color:         inherit;
+  text-color:               @foreground-0;
+
+  children:                 [ "listbox" ];
+}
+
+/* List Container */
+
+listbox {
+  enabled:                  true;
+  background-color:         inherit;
+
+  children:                 [ "listview" ];
+}
+
+/* List View */
+
+listview {
+  enabled:                  true;
+  layout:                   vertical;
+  cycle:                    true;
+  columns:                  1;
+  lines:                    6;
+  padding:                  6px;
+  spacing:                  0;
+  background-color:         inherit;
+}
+
+/* List Elements */
+
+element {
+  enabled:                  true;
+  padding:                  6px;
+  cursor:                   pointer;
+  background-color:         transparent;
+  text-color:               @foreground-0;
+}
+
+element selected.normal {
+  border-radius:            2px;
+  background-color:         @background-3;
+  text-color:               @accent-7;
+}
+
+/* Element Text */
+
+element-text {
+  enabled:                  true;
+  cursor:                   inherit;
+  background-color:         transparent;
+  text-color:               inherit;
+}

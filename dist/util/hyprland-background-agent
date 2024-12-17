@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ -f "$HOME/util/standard_lib.bash" ] && source "$HOME/util/standard_lib.bash"
+[ -f "$HOME/util/standard-lib.bash" ] && source "$HOME/util/standard-lib.bash"
 
 # -> Setup session-wide proxy.
 if [ "$( executable_exists pass )" = 1 ]; then
@@ -12,13 +12,13 @@ if [ "$( executable_exists pass )" = 1 ]; then
         pass_output="$( echo -ne "$pass_output" | grep -Po "^([a-zA-z]+):\s+\K(.+)" )"
 
         proxy_username="$( echo -ne "$pass_output" | head -1 )"
-        
+
         proxy_url="$( echo -ne "$pass_output" | tail -1 )"
 
         unset pass_output
 
         proxy_protocol="$( echo -ne "$proxy_url" | grep -Po "^\K([a-z0-9]+)" )"
-        
+
         proxy_domain="$( echo -ne "$proxy_url" | grep -Po "^([a-z0-9]+)://\K(.+)$" )"
 
         echo "$proxy_domain"
@@ -30,7 +30,7 @@ if [ "$( executable_exists pass )" = 1 ]; then
         unset proxy_domain
         unset proxy_username
         unset proxy_password
-    
+
         declare -a TARGET_IDENTIFIERS=("HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "RSYNC_PROXY")
 
         for identifier in "${TARGET_IDENTIFIERS[@]}"; do
@@ -55,13 +55,13 @@ fi
 
     wine_process=0
 
-    if [ "$(basename "$process_executable" | grep -P "^wine.*$" | wc -l)" != 0 ]; then
+    if [ "$(basename "$process_executable" | grep -c -P "^wine.*$")" != 0 ]; then
       wine_process=1
     fi
 
-    hyprctl clients -j | jq -r ".[] | select( .pid == ${active_window} )"
+    hyprctl clients -j | jq -r ".[] | select(.pid == ${active_window} )"
 
     echo "$wine_process"
-    
+
   done
 }

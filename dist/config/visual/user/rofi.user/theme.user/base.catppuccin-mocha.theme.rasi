@@ -1,0 +1,36 @@
+/* catppuccin mocha theme */
+/* ref: https://github.com/catppuccin */
+
+@theme "base.catppuccin-mocha.color.rasi"
+
+* {
+    foreground-0: @text;
+    foreground-1: @subtext1;
+    foreground-2: @subtext0;
+    foreground-3: @overlay2;
+    foreground-4: @overlay1;
+    foreground-5: @overlay0;
+    foreground-6: @surface2;
+    foreground-7: @surface1;
+    foreground-8: @surface0;
+
+    background-0: @base;
+    background-1: @mantle;
+    background-2: @crust;
+    background-3: @surface0;
+    background-4: @surface1;
+    background-5: @surface2;
+    background-6: @overlay0;
+    background-7: @overlay1;
+    background-8: @overlay2;
+
+    accent-0: @rosewater;
+    accent-1: @flamingo;
+    accent-2: @pink;
+    accent-3: @mauve;
+    accent-4: @red;
+    accent-5: @maroon;
+    accent-6: @peach;
+    accent-7: @yellow;
+    accent-8: @green;
+}

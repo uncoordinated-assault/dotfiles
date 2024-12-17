@@ -1,0 +1,9 @@
+*
+
+!.gitignore
+!*.md
+
+!base.*
+base.*.bak
+
+!*.user

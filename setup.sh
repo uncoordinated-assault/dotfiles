@@ -61,6 +61,9 @@ declare -A SYMLINK_TARGETS_VISUAL=(
 
     ["$HOME/.wallpaper"]="dist/wallpaper"
 
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/qt5ct/colors"]="dist/config/visual/app/qt5ct"
+
+
     ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/config"]="dist/config/visual/app/waybar.config"
     ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/style.css"]="dist/config/visual/app/waybar-style.css"
 

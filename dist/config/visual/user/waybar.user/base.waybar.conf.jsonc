@@ -170,9 +170,9 @@
         ]
     },
     "network": {
-        "format-wifi": "直 {signalStrength:2}%",
-        "format-ethernet": " ",
-        "format-disconnected": "睊"
+        "format-wifi": "\uf1eb  {signalStrength:2}%",
+        "format-ethernet": "\uef44 ",
+        "format-disconnected": "\udb81\uddaa "
     },
     "bluetooth": {
         "format": " {status}",

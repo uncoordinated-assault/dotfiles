@@ -65,6 +65,7 @@ declare -A SYMLINK_TARGETS_VISUAL=(
     ["${XDG_CONFIG_HOME:-$HOME/.config}/waybar/style.css"]="dist/config/visual/app/waybar-style.css"
 
     ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"]="dist/config/visual/app/hyprland.config"
+    ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprpaper.conf"]="dist/config/visual/app/hyprpaper.config"
     ["${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hypridle.conf"]="dist/config/visual/app/hypridle.config"
 
     ["$HOME/.alacritty.toml"]="dist/config/visual/app/alacritty.config.toml"

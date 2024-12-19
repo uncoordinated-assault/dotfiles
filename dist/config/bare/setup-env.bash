@@ -10,8 +10,6 @@ declare -A DEFAULT_ENVIRONMENT=(
     [GPG_TTY]="$( tty )"
 
     [LIBCLANG_PATH]="/usr/local/lib"
-
-    [visual:XDG_SESSION_TYPE]="Xorg"
 )
 
 # Inherit previously set $PATH from /etc/profile
@@ -61,8 +59,15 @@ if [[ -f "$( realpath -Pm "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )" 
     eval "$( grep -E "^[A-Z_]+=\"\S+\"$" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" )"
 
     # no word-splitting guaranteed
-    # shellcheck disable=2046
-    export $( grep -Eo "^[A-Z_]+" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" | tr "\n" " " )
+    xdg_folders="$( grep -Eo "^[A-Z_]+" "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" | tr "\n" " " )"
+
+    for xdg_folder in $xdg_folders; do
+        mkdir -vp "${!xdg_folder}"
+    done
+
+    # shellcheck disable=2068
+    export ${xdg_folders[@]}
+
     :
 fi
 

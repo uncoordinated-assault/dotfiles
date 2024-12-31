@@ -192,9 +192,9 @@
     },
     "pulseaudio": {
         "format": "{icon}  {volume}%",
-        "format-bluetooth": "   {volume}%",
-        "format-bluetooth-muted": "婢 ",
-        "format-muted": "婢 muted",
+        "format-bluetooth": "\udb80\udcaf  \uf028 {volume}%",
+        "format-bluetooth-muted": "\udb80\udcaf  \udb81\udf5f",
+        "format-muted": "\udb81\udf5f muted",
         "format-icons": {
             "headphone": "",
             "hands-free": "",

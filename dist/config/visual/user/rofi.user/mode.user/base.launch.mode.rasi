@@ -17,7 +17,7 @@ configuration {
         /** Parse user desktop files. */
         parse-user:   true;
         /** Parse system desktop files. */
-        parse-system: false;
+        parse-system: true;
     }
 }
 

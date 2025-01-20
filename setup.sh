@@ -22,12 +22,6 @@ case "$SETUP_MODE" in
     ;;
 esac
 
-if [ "$EUID" != 0 ] && [ "$SETUP_MODE" = "system" ]; then
-    printf "E: setup mode \`%s\` requires root privileges\n" "$SETUP_MODE"
-
-    exit 1
-fi
-
 CURRENT_FILE="$(pwd -L)/${0}"
 CURRENT_DIRECTORY=$(dirname "$CURRENT_FILE")
 
